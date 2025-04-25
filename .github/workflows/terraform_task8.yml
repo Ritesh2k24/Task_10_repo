@@ -24,15 +24,15 @@ jobs:
 
       - name: Terraform Init
         run: |
-          cd Terraform_task5
+          cd Terraform_task8
           terraform init
 
       - name: Terraform plan
         run: |
-          cd Terraform_task5
+          cd Terraform_task8
           terraform plan
           
       - name: Terraform Apply
         run: |
-          cd Terraform_task5
+          cd Terraform_task8
           terraform apply -auto-approve
