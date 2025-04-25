@@ -4,7 +4,7 @@ on:
   workflow_dispatch:  # Triggered manually via the GitHub UI
   
 jobs:
-  destroy:
+  apply:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
