@@ -32,7 +32,7 @@ I have successfully deployed and published a Strapi application on AWS ECS Farga
 
 *Testing:
 
--Verified published content via public API endpoint: http://strapi-alb-1913271914.us-east-1.elb.amazonaws.com/api/Articles
+-Verified published content via public API endpoint: http://strapi-alb-970200703.us-east-1.elb.amazonaws.com/api/Articles
 
 *Result:
 
