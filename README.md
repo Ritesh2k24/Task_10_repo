@@ -1,6 +1,6 @@
-# task_8_
+# Task_9_
 
-Deploy the strapi application on ECS and Use the public URL (e.g., http://<alb-dns-name>/api/[your-endpoint]) to test APIs or connect a frontend.
+Deploy the strapi application on ECS FARGATE_SPOT and Use the public URL (e.g., http://<alb-dns-name>/api/[your-endpoint]) to test APIs or connect a frontend.
 
 I have successfully deployed and published a Strapi application on AWS ECS Fargate using Terraform for infrastructure provisioning and GitHub Actions for CI/CD automation.
 
@@ -38,10 +38,8 @@ I have successfully deployed and published a Strapi application on AWS ECS Farga
 
 -Content now accessible publicly via ALB URL with proper permissions. Please find below the screenshots. 
 
-![image](https://github.com/user-attachments/assets/8cadfd97-c924-4bb6-af5c-9b51299c0a7b)
+![alt text](image.png)
 
+![alt text](image-2.png)
 
-![image](https://github.com/user-attachments/assets/cb321539-f5c8-416f-b6db-1d2842eb741b)
-
-![image](https://github.com/user-attachments/assets/de7ceb16-7287-4e60-b17b-ec1dd39973f2)
-
+![alt text](image-3.png)
