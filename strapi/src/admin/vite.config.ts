@@ -25,7 +25,7 @@ export default (config: UserConfig) => {
     server: {
       host: true, // Listen on all addresses
       allowedHosts: [
-        'strapi-alb-1913271914.us-east-1.elb.amazonaws.com',
+        '.elb.amazonaws.com',
       ],
     },
   });
