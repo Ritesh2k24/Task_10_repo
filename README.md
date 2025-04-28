@@ -2,7 +2,7 @@
 
 Deploy the strapi application on ECS FARGATE_SPOT and Use the public URL (e.g., http://<alb-dns-name>/api/[your-endpoint]) to test APIs or connect a frontend.
 
-I have successfully deployed and published a Strapi application on AWS ECS Fargate using Terraform for infrastructure provisioning and GitHub Actions for CI/CD automation.
+I have successfully deployed and published a Strapi application on AWS ECS Fargate_spot using Terraform for infrastructure provisioning and GitHub Actions for CI/CD automation.
 
 ✅ Key Highlights:
 
@@ -10,7 +10,7 @@ I have successfully deployed and published a Strapi application on AWS ECS Farga
 
 -Dockerized Strapi app image pushed to Amazon ECR
 
--ECS Fargate used for running the container
+-ECS Fargate_spot used for running the container
 
 -Application Load Balancer (ALB) exposed the Strapi admin panel & API
 
