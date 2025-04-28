@@ -54,6 +54,17 @@ resource "aws_ecs_task_definition" "strapi_task" {
   }])
 }
 
+
+resource "aws_ecs_cluster_capacity_providers" "cluster" {
+  cluster_name = aws_ecs_cluster.strapi.name
+ 
+  capacity_providers = ["FARGATE_SPOT", "FARGATE"]
+ 
+  default_capacity_provider_strategy {
+    capacity_provider = "FARGATE_SPOT"
+  }
+}
+
 resource "aws_ecs_service" "strapi_service" {
   name            = "strapi-service"
   cluster         = aws_ecs_cluster.strapi.id
