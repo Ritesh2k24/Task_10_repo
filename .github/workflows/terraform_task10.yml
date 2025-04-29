@@ -36,3 +36,17 @@ jobs:
         run: |
           cd Terraform_task10
           terraform apply -auto-approve
+
+      - name: Get ECS Task Definition ARN
+        id: get_task_def
+        run: |
+          TASK_ARN=$(aws ecs list-task-definitions --family-prefix strapi-task --sort DESC --max-items 1 --query 'taskDefinitionArns[0]' --output text)
+          echo "taskDefinitionArn=$TASK_ARN" >> $GITHUB_OUTPUT
+
+      - name: Trigger CodeDeploy Deployment
+        run: |
+          aws deploy create-deployment \
+            --application-name strapi-codedeploy-app \
+            --deployment-group-name strapi-deploy-group \
+            --deployment-config-name CodeDeployDefault.ECSCanary10Percent5Minutes \
+            --revision revisionType=AppSpecContent,appSpecContent="{\"version\":\"1.0\",\"Resources\":[{\"TargetService\":{\"Type\":\"AWS::ECS::Service\",\"Properties\":{\"TaskDefinition\":\"${{ steps.get_task_def.outputs.taskDefinitionArn }}\",\"LoadBalancerInfo\":{\"ContainerName\":\"strapi\",\"ContainerPort\":1337}}}}]}"          
