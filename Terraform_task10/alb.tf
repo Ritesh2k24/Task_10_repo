@@ -40,7 +40,7 @@ resource "aws_lb_target_group" "green" {
   }
 }
 
-resource "aws_lb_listener" "http" {
+resource "aws_lb_listener" "strapi_listener" {
   load_balancer_arn = aws_lb.strapi_alb.arn
   port              = 80
   protocol          = "HTTP"
