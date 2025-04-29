@@ -1,45 +1,98 @@
-# Task_9_
+# Task_10_
 
-Deploy the strapi application on ECS FARGATE_SPOT and Use the public URL (e.g., http://<alb-dns-name>/api/[your-endpoint]) to test APIs or connect a frontend.
+Implement Blue/Green Deployment for Strapi App using GitHub Actions CI/CD
+Below are the steps which I performed: 
 
-I have successfully deployed and published a Strapi application on AWS ECS Fargate_spot using Terraform for infrastructure provisioning and GitHub Actions for CI/CD automation.
+1. Containerization & Image Push
+   
+- I Used an existing Dockerized Strapi application.
 
-✅ Key Highlights:
+- Then tagged and pushed the Docker image to Amazon ECR
 
-*Deployment Stack:
+2. Terraform-Based ECS Infrastructure
+   
+- Created the following Terraform resources:
 
--Dockerized Strapi app image pushed to Amazon ECR
+- VPC, Subnets, Security Groups
 
--ECS Fargate_spot used for running the container
+- ALB (Application Load Balancer) with:
 
--Application Load Balancer (ALB) exposed the Strapi admin panel & API
+- Two Target Groups: strapi-blue-tg and strapi-green-tg
 
-*Environment Setup:
+- Listener on port 80 forwarding to the target group
 
--.env used to configure APP_KEYS, ALLOWED_HOSTS, etc.
+- ECS Cluster and Fargate Task Definition using the ECR image
 
--ALB DNS mapped as APP_URL for Strapi
+- ECS Service with:
 
--CloudWatch used for ECS task logging
+- Blue/Green deployment support
 
-*Publishing Content:
+- Linked to both target groups
 
--Created Collection Types Article in Strapi Admin. Also created Single Types (Date1)
+- ECS Cluster Capacity Providers (FARGATE_SPOT + FARGATE)
 
--Configured Public Role Permissions to allow unauthenticated access to API endpoints.
+- Deployment Controller set to "CODE_DEPLOY"
 
--Published content directly from the admin dashboard
+3. CodeDeploy Configuration
+   
+ Created:
+ 
+- CodeDeploy Application for ECS
 
-*Testing:
+- CodeDeploy Deployment Group with:
 
--Verified published content via public API endpoint: http://strapi-alb-970200703.us-east-1.elb.amazonaws.com/api/Articles
+- Blue/Green deployment strategy (CodeDeployDefault.ECSCanary10Percent5Minutes)
 
-*Result:
+- Traffic shifting between target groups
 
--Content now accessible publicly via ALB URL with proper permissions. Please find below the screenshots. 
+- Auto rollback and termination of original task set after deployment
 
-![alt text](image.png)
+4. GitHub Actions CI/CD Setup
+   
+- Configured .github/workflows/terraform_task10.yml which performed:
 
-![alt text](image-2.png)
+- Checkout code
+- Initialize and apply Terraform
 
-![alt text](image-3.png)
+- Trigger CodeDeploy deployment using AWS CLI
+
+5. Manual Verification
+   
+- Accessed Strapi app via ALB DNS URL.
+
+- Verified deployment success in CodeDeploy console:
+
+- Canary deployment (10% → 100% traffic shift)
+
+- Replacement task set successfully took over
+
+- Original task set terminated post-wait
+
+6. Results
+   
+- Blue/Green deployment completed successfully.
+
+- Zero downtime with automatic traffic shifting.
+
+- Infrastructure automated and managed using Terraform.
+
+- Deployment triggered through GitHub Actions and verified on AWS Console.
+
+
+
+![image](https://github.com/user-attachments/assets/f6d356be-0252-44c4-84be-e5d331442256)
+
+![image](https://github.com/user-attachments/assets/3701b23e-e8b4-4b20-9a2d-8de125d39a00)
+
+![image](https://github.com/user-attachments/assets/1e115d64-bb92-4a59-8a7f-26abf8b1da98)
+
+![image](https://github.com/user-attachments/assets/a01557df-8bb1-426c-89cd-e29945e36759)
+
+
+
+
+
+
+
+
+
