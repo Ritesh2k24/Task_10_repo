@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "Resources": [
+    {
+      "TargetService": {
+        "Type": "AWS::ECS::Service",
+        "Properties": {
+          "TaskDefinition": "arn:aws:ecs:us-east-1:905418107991:task-definition/strapi-task:31",
+          "LoadBalancerInfo": {
+            "ContainerName": "strapi",
+            "ContainerPort": 1337
+          }
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
