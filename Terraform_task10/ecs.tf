@@ -1,3 +1,8 @@
+provider "aws" {
+  region  = "us-east-1"
+  profile = "default"
+}
+
 data "aws_caller_identity" "current" {}
 
 resource "aws_ecs_cluster" "strapi" {
